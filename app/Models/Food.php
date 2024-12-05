@@ -12,7 +12,7 @@ class Food extends Model
 
     protected $fillable = 
     [
-        'cateory_id',
+        'category_id',
         'name',
         'image',
         'price',
