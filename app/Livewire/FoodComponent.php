@@ -31,7 +31,7 @@ class FoodComponent extends Component
         $this->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp|max:5000',
             'price' => 'required|integer',
         ]);
     

@@ -16,7 +16,7 @@ class Category extends Model
         'sort',
     ];
 
-    public function food()
+    public function foods()
     {
         return $this->hasMany(Food::class);
     }

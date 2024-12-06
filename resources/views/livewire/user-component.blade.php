@@ -7,63 +7,58 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="/user" class="nav-link">All</a>
+                    </li>
                     @foreach ($categories as $category)
                     <li class="nav-item">
-                        <a href="/" class="nav-link">{{ $category->name }}</a>
+                        <a href="{{ route('foodFilter', $category->id) }}" class="nav-link">{{ $category->name }}</a>
                     </li>
                     @endforeach
-                    <li class="nav-item"><a href="/" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="/" class="nav-link">Admin</a></li>
+                    <li class="nav-item">
+                        <a href="/cart" class="nav-link">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="badge badge-pill badge-danger">{{ $cartCount }}</span>
+                        </a>
+                    </li>
+                    
                 </ul>
             </div>
         </div>
     </nav>
-    
-	<section class="ftco-section mt-5">
-		<div class="container">
-			<div class="row justify-content-center mb-3 pb-2">
-				<div class="col-md-7 text-center heading-section ftco-animate">
-					<span class="subheading">Specialties</span>
-					<h2 class="mb-4">Our Menu</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 col-lg-4">
-					<div class="menu-wrap">
-						<div class="heading-menu text-center ftco-animate">
-							<h3>Breakfast</h3>
-						</div>
-						
-						@php
-						$count = 0;
-						@endphp
-						
-						@foreach ($foods as $food)
-							@php
-							$count+=1;
-							@endphp
-							<div class="menus d-flex ftco-animate mt-5">
-								<img src="{{ asset('storage/' . $food->image) }}" alt="Breakfast" style="width: 100px; border-radius: 10px;">
-								<div class="text">
-									<div class="d-flex">
-										<div class="one-half">
-											<h3>{{ $food->name }}</h3>
-										</div>
-										<div class="one-forth">
-											<span class="price">{{ $food->price }}</span>
-										</div>
-									</div>
-									<a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-								</div>
-							</div>
-						@endforeach
-						
-						<span class="flat flaticon-bread" style="left: 0;"></span>
-						<span class="flat flaticon-breakfast" style="right: 0;"></span>
-					</div>
-				</div>
 
-			</div>
-		</div>
-
-	</section>
+<section class="ftco-section mt-5">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-2">
+            <div class="col-md-7 text-center heading-section">
+                <span class="subheading">Specialties</span>
+                <h2 class="mb-4">Our Menu</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="menu-wrap">
+                    @forelse ($foods as $food)
+                        <div class="menus d-flex  mt-4">
+                            <img src="{{ asset('storage/' . $food->image) }}" alt="{{ $food->name }}" style="width: 80px; border-radius: 10px;">
+                            <div class="text pl-3">
+                                <div class="d-flex justify-content-between">
+                                    <h4>{{ $food->name }}</h4>
+                                    <span class="price text-danger">${{ $food->price }}</span>
+                                </div>
+                                <button wire:click="addToCart({{ $food->id }})" class="btn btn-sm btn-outline mt-2">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </button>
+                            </div>
+                        </div>
+                    @empty
+                        <p class="text-center">No food available for this category.</p>
+                    @endforelse
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
 </div>
