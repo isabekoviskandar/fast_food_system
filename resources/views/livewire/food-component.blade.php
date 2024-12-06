@@ -47,7 +47,6 @@
             </tbody>
         </table>
     </div>
-
     <!-- Create Modal -->
     @if ($openCreateModal)
         <div class="modal fade show d-block" style="background: rgba(0, 0, 0, 0.5);" tabindex="-1">
@@ -59,7 +58,7 @@
                     </div>
                     <div class="modal-body">
                         <form wire:submit.prevent="create">
-                            <div>
+                            <div class="mb-3">
                                 <label for="category_id">Category</label>
                                 <select id="category_id" wire:model="category_id">
                                     <option value="">Select a category</option>

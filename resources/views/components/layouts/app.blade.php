@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 
 
 </head>
@@ -71,6 +71,15 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Foods
+                <span class="right badge badge-secodary"></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/user" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                User page
                 <span class="right badge badge-secodary"></span>
               </p>
             </a>

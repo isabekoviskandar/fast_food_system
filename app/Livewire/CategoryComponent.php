@@ -31,6 +31,7 @@ class CategoryComponent extends Component
 
         session()->flash('success', 'Category created successfully.');
         $this->resetInputFields();
+        $this->categories = Category::all();
         $this->openCreateModal = false;
     }
     public function delete($id)
@@ -81,6 +82,7 @@ class CategoryComponent extends Component
             ]);
             session()->flash('success', 'Category updated successfully.');
             $this->resetInputFields();
+            $this->categories = Category::all();
             $this->openEditModal = false; 
         }
     }    

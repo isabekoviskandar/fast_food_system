@@ -31,14 +31,14 @@ class FoodComponent extends Component
         $this->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string',
-            'image' => 'required|image|max:5000',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
             'price' => 'required|integer',
         ]);
     
          // dd($this->category_id, $this->name, $this->image, $this->price);
     
         $filePath = $this->image->store('storage/', 'public');
-    
+     
         Food::create([
             'category_id' => $this->category_id,
             'name' => $this->name,
