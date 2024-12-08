@@ -20,7 +20,34 @@ class FoodFilter extends Component
         $this->categories = Category::all(); 
     }
 
-    
+    public function addToCart($foodId)
+    {
+        $food = Food::find($foodId);
+
+        if (!$food) {
+            session()->flash('error', 'Food item not found.');
+            return;
+        }
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$foodId])) {
+            $cart[$foodId]['quantity']++;
+        } else {
+            $cart[$foodId] = [
+                'name' => $food->name,
+                'price' => $food->price,
+                'image' => $food->image,
+                'quantity' => 1,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        $this->cartCount = count($cart);
+
+        session()->flash('success', 'Item added to cart.');
+    }
 
     public function render()
     {

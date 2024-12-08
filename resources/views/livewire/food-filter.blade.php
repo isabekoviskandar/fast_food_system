@@ -1,4 +1,61 @@
 <div>
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <h5 class="mb-3">
+                                <a href="/user" class="text-body">
+                                    <i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping
+                                </a>
+                            </h5>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <p class="mb-1">Shopping cart</p>
+                                    <p class="mb-0">You have {{ $cartCount }} items in your cart</p>
+                                </div>
+                            </div>
+                            @foreach (session('cart', []) as $id => $item)
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div>
+                                                    <img src="{{ asset('storage/' . $item['image']) }}" class="img-fluid rounded-3" alt="{{ $item['name'] }}" style="width: 65px;">
+
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h5>{{ $item['name'] }}</h5>
+                                                    <p class="small mb-0">Price: ${{ $item['price'] }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div style="width: 50px;">
+                                                    <h5 class="fw-normal mb-0">{{ $item['quantity'] }}</h5>
+                                                </div>
+                                                <div style="width: 80px;">
+                                                    <h5 class="mb-0">${{ $item['price'] * $item['quantity'] }}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
             <div class="container">
                 <a class="navbar-brand" href="/user">Dunia<span>.</span></a>

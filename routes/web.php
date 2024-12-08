@@ -10,3 +10,4 @@ Route::get('/', CategoryComponent::class);
 Route::get('/foods' , FoodComponent::class);
 Route::get('/user', UserComponent::class);
 Route::get('/category/{category}' , FoodFilter::class)->name('foodFilter');
+Route::get('/cart', UserComponent::class)->name('user.cart');

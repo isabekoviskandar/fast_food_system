@@ -17,12 +17,22 @@
 	<link rel="stylesheet" href="{{ asset('css/flaticon.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> --}}
+	<!-- Font Awesome for icons -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 
 	<style>
 	.rounded-img {
 		height: 80px;
 		width: 100px;
 		border-radius: 40px;
+	}
+	@media (min-width: 1025px) {
+	.h-custom {
+	height: 100vh !important;
+	}
 	}
 
 	</style>
@@ -130,6 +140,8 @@
 		<!-- loader -->
 		{{-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> --}}
 
+		<!-- Bootstrap JS with Popper -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery-migrate-3.0.1.min.js"></script>
