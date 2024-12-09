@@ -17,7 +17,7 @@ class FoodFilter extends Component
     {
         $this->cartCount = session('cart') ? count(session('cart')) : 0;
         $this->foods = Food::where('category_id', $category->id)->get();
-        $this->categories = Category::all(); 
+        $this->categories = Category::all();
     }
 
     public function addToCart($foodId)

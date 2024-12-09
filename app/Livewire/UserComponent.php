@@ -5,7 +5,6 @@ use App\Models\Category;
 use App\Models\Food;
 use App\Models\Order;
 use App\Models\OrderItems;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class UserComponent extends Component

@@ -76,6 +76,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/orders" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Orders
+                <span class="right badge badge-secodary"></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/user" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
