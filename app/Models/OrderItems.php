@@ -12,11 +12,15 @@ class OrderItems extends Model
     protected $fillable = 
     [
         'order_id',
-        'ovqat_id',
+        'food_id',
         'count',
         'total_price',
         'status',
     ];
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
     
 }

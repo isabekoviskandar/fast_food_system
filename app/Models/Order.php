@@ -16,4 +16,9 @@ class Order extends Model
         'sum',
         'status',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(OrderItems::class);
+    }
 }

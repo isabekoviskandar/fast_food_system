@@ -3,6 +3,9 @@ namespace App\Livewire;
 
 use App\Models\Category;
 use App\Models\Food;
+use App\Models\Order;
+use App\Models\OrderItems;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class UserComponent extends Component
@@ -25,7 +28,6 @@ class UserComponent extends Component
     {
         $cart = session('cart', []);
         
-        // Validate quantity
         $quantity = max(1, intval($quantity));
         
         if (isset($cart[$id])) {
@@ -35,7 +37,6 @@ class UserComponent extends Component
             $this->recalculateTotal();
             $this->updateCartCount();
             
-            // Dispatch browser event to keep modal open
             $this->dispatch('cart-updated');
         } else {
             session()->flash('error', 'Item not found in cart.');
@@ -44,44 +45,29 @@ class UserComponent extends Component
 
     public function recalculateTotal()
     {
-        $cart = session()->get('cart', []);
-        $this->total = array_sum(array_map(function ($item) {
-            $price = $item['price'] ?? 0;
-            $quantity = $item['quantity'] ?? 0;
-            return $price * $quantity;
-        }, $cart));
+        $this->total = array_reduce($this->cart, function ($carry, $item) {
+            return $carry + ($item['price'] * $item['quantity']);
+        }, 0);
     }
 
     public function addToCart($foodId)
     {
-        $food = Food::find($foodId);
-        
-        if (!$food) {
-            session()->flash('error', 'Food item not found.');
-            return;
-        }
-        
-        $cart = session()->get('cart', []);
-        
-        if (isset($cart[$foodId])) {
-            $cart[$foodId]['quantity']++;
-        } else {
-            $cart[$foodId] = [
-                'name' => $food->name,
-                'price' => $food->price,
-                'image' => $food->image,
-                'quantity' => 1,
-            ];
-        }
-        
-        session()->put('cart', $cart);
-        $this->cart = $cart;
-        $this->updateCartCount();
+        $food = Food::findOrFail($foodId);
+    
+        $this->cart[$foodId] = [
+            'name' => $food->name,
+            'price' => $food->price,
+            'image' => $food->image,
+            'quantity' => ($this->cart[$foodId]['quantity'] ?? 0) + 1,
+        ];
+    
+        session(['cart' => $this->cart]);
         $this->recalculateTotal();
-        $this->dispatch('cart-updated');
-        
-        session()->flash('success', 'Item added to cart.');
+        $this->updateCartCount();
+    
+        session()->flash('success', "{$food->name} added to cart.");
     }
+    
 
     public function updateCartCount()
     {
@@ -104,7 +90,41 @@ class UserComponent extends Component
             session()->flash('success', 'Item removed from cart.');
         }
     }
-
+    
+    public function saveOrder()
+    {
+        if (empty($this->cart)) {
+            session()->flash('error', 'Your cart is empty.');
+            return;
+        }
+    
+        $order = Order::create([
+            'date' => now()->toDateString(),
+            'sequence' => rand(1000, 9999),
+            'sum' => $this->total,
+            'status' => 'took',
+        ]);
+    
+        foreach ($this->cart as $foodId => $item) {
+            OrderItems::create([
+                'order_id' => $order->id,
+                'food_id' => $foodId,
+                'count' => $item['quantity'],
+                'total_price' => $item['price'] * $item['quantity'],
+                'status' => 'took',
+            ]);
+        }
+    
+        session()->forget('cart');
+        $this->cart = [];
+        $this->cartCount = 0;
+        $this->total = 0;
+    
+        $this->dispatch('cart-updated');
+    
+        session()->flash('success', 'Order placed successfully!');
+    }
+    
     public function render()
     {
         return view('livewire.user-component', [

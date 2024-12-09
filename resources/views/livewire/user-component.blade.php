@@ -67,6 +67,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="d-flex justify-content-center mb-4">
+                    <button wire:click="saveOrder" class="btn btn-danger btn-lg">Place Order</button>
+                </div>
+                
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
