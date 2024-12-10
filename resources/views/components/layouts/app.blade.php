@@ -106,7 +106,7 @@
             <a href="/hodim" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Employesp
+                Employes
                 <span class="right badge badge-secodary"></span>
               </p>
             </a>

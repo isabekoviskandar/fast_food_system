@@ -15,7 +15,7 @@ class Hodim extends Model
         'user_id',
         'bolim_id',
         'oylik_type',
-        'oylik_miqdor',
+        'oylik_miqdori',
         'bonus',
         'oylik_time',
         'start_time',
