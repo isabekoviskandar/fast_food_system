@@ -18,6 +18,8 @@
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
 
 	<style>
@@ -139,6 +141,7 @@
 
 		<!-- Bootstrap JS with Popper -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -156,6 +159,17 @@
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
 		<script src="js/google-map.js"></script>
 		<script src="js/main.js"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+				Livewire.on('cart-updated', () => {
+					const modal = document.getElementById('cartModal');
+					if (modal && !modal.classList.contains('show')) {
+						const bootstrapModal = new bootstrap.Modal(modal);
+						bootstrapModal.show();
+					}
+				});
+			});
+		</script>
 		@livewireScripts
 	</body>
 	</html>

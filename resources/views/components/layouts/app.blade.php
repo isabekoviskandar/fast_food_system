@@ -85,6 +85,33 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/users" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Users
+                <span class="right badge badge-secodary"></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/bolim" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Sections
+                <span class="right badge badge-secodary"></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/hodim" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Employesp
+                <span class="right badge badge-secodary"></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/user" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
