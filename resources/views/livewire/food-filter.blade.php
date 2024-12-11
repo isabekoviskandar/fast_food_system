@@ -72,7 +72,6 @@
                             <a href="{{ route('foodFilter', $category->id) }}" class="nav-link">{{ $category->name }}</a>
                         </li>
                         @endforeach
-                        <li class="nav-item"><a href="/" class="nav-link">Admin</a></li>
                         <li class="nav-item">
                             <a href="/cart" class="nav-link">
                                 <i class="fa-solid fa-cart-shopping"></i>

@@ -21,9 +21,15 @@ class AuthComponent extends Component
         $this->validate();
 
         if (Auth::attempt(['phone' => $this->phone, 'password' => $this->password])) {
-            Session::flash('success', 'Login successful!');
+            $user = Auth::user(); 
             
-            return $this->redirect('/users');
+            if ($user->role === 'admin') { 
+                Session::flash('success', 'Welcome, Admin!');
+                return $this->redirect('/category'); 
+            } else {
+                Session::flash('success', 'Login successful!');
+                return $this->redirect('/user'); 
+            }
         } else {
             $this->error = 'Invalid phone number or password';
         }

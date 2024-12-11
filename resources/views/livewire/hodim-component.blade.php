@@ -23,10 +23,14 @@
                     @endforeach
                 </select>
                 </div>
-                  <div class="form-group">
-                      <label for="oylik_type">Oylik Type</label>
-                      <input type="text" wire:model="oylik_type" class="form-control" id="oylik_type" required>
-                  </div>
+                <div class="form-group">
+                    <label for="oylik_type">Oylik Type</label>
+                    <select wire:model="oylik_type" class="form-control" id="oylik_type" required>
+                        <option value="">Select Oylik Type</option>
+                        <option value="oylik">Oylik</option>
+                        <option value="kpi">KPI</option>
+                    </select>
+                </div>
                   <div class="form-group">
                       <label for="oylik_miqdori">Oylik Miqdori</label>
                       <input type="number" wire:model="oylik_miqdori" class="form-control" id="oylik_miqdori" required>
@@ -77,10 +81,15 @@
                     @endforeach
                 </select>
                 </div>
-                  <div class="form-group">
-                      <label for="oylik_type">Oylik Type</label>
-                      <input type="text" wire:model="oylik_type" class="form-control" id="oylik_type" required>
-                  </div>
+                <div class="form-group">
+                    <label for="oylik_type">Oylik Type</label>
+                    <select wire:model="oylik_type" class="form-control" id="oylik_type" required>
+                        <option value="">Select Oylik Type</option>
+                        <option value="oylik">Oylik</option>
+                        <option value="kpi">KPI</option>
+                    </select>
+                </div>
+                
                   <div class="form-group">
                       <label for="oylik_miqdori">Oylik Miqdori</label>
                       <input type="number" wire:model="oylik_miqdori" class="form-control" id="oylik_miqdori" required>

@@ -58,7 +58,7 @@
             </a>
             <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/category" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Categories
@@ -107,6 +107,15 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Employes
+                <span class="right badge badge-secodary"></span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/jurnal" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Jurnal
                 <span class="right badge badge-secodary"></span>
               </p>
             </a>

@@ -120,7 +120,7 @@ class HodimComponent extends Component
     public function render()
     {
         return view('livewire.hodim-component', [
-            'hodims' => Hodim::paginate(10)
+            'hodims' => Hodim::all()
         ]);
     }
 }

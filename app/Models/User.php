@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Hodim::class);
     }
+
+    public function jurnal()
+    {
+        return $this->hasMany(Jurnal::class);
+    }
 }

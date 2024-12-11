@@ -32,4 +32,9 @@ class Hodim extends Model
     {
         return $this->belongsTo(Bolim::class);
     }
+
+    public function jurnals()
+    {
+        return $this->hasMany(Jurnal::class, 'hodim_id');
+    }
 }
