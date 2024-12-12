@@ -1,42 +1,82 @@
 <?php
+
 namespace App\Livewire;
 
-use Livewire\Component;
+use App\Models\Jurnal;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Livewire\Component;
 
 class AuthComponent extends Component
 {
-    public $phone = '';
-    public $password = '';
-    public $error = '';
+    public $phone;
+    public $password;
 
     protected $rules = [
-        'phone' => 'required|string',
-        'password' => 'required|string'
+        'phone' => 'required',
+        'password' => 'required|min:8',
     ];
-
-    public function login()
+    private function getOrCreateJurnalEntry($user, $date)
     {
-        $this->validate();
-
-        if (Auth::attempt(['phone' => $this->phone, 'password' => $this->password])) {
-            $user = Auth::user(); 
-            
-            if ($user->role === 'admin') { 
-                Session::flash('success', 'Welcome, Admin!');
-                return $this->redirect('/category'); 
-            } else {
-                Session::flash('success', 'Login successful!');
-                return $this->redirect('/user'); 
-            }
-        } else {
-            $this->error = 'Invalid phone number or password';
-        }
+        
+        return Jurnal::firstOrCreate([
+            'user_id' => $user->id,
+            'date' => $date
+        ], [
+            'hodim_id' => $user->hodim->id,
+            'start_time' => now()->toTimeString(), // or now() if it's dateTime
+            'end_time' => null,
+            'time' => 0,
+        ]);
     }
+    public function logout()
+    {
+        $user = Auth::user();
+        $date = now()->toDateString();
 
+        $jurnal = Jurnal::where('user_id', $user->id)
+            ->where('date', $date)
+            ->first();
+        if ($jurnal) {
+            $end_time = now();
+            $start_time = $jurnal->start_time;
+
+            $time_difference = round((strtotime($end_time) - strtotime($start_time)) / 3600, 2);
+
+            $jurnal->update([
+                'end_time' => $end_time,
+                'time' => $time_difference,
+            ]);
+        }
+
+        Auth::logout();
+        session()->flash('success', 'Siz tizimdan muvaffaqiyatli chiqdingiz!');
+        return redirect('/');
+    }
     public function render()
     {
         return view('livewire.auth-component')->layout('components.layouts.empty');
+    }
+    public function login()
+    {
+        $this->validate();
+    
+        if (Auth::attempt(['phone' => $this->phone, 'password' => $this->password])) {
+            $user = Auth::user();
+            $hodim_id = $user->hodim ? $user->hodim->id : null;
+    
+            if (!$hodim_id) {
+                session()->flash('error', 'Hodim topilmadi!');
+                return back();
+            }
+            
+            $date = now()->toDateString();
+            $jurnal = $this->getOrCreateJurnalEntry($user, $date);
+    
+            session()->flash('success', 'Siz tizimga muvaffaqiyatli kirdingiz! Jurnal saqlandi.');
+            return redirect('/category');
+        } else {
+            session()->flash('error', 'Foydalanuvchi topilmadi!');
+            return back();
+        }
     }
 }

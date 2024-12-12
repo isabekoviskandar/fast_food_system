@@ -23,3 +23,4 @@ Route::get('/bolim' , BolimComponent::class);
 Route::get('/users' , UsersComponent::class);
 Route::get('/hodim' , HodimComponent::class);
 Route::get('/jurnal' , JurnalComponent::class);
+Route::get('/logout' , AuthComponent::class);

@@ -1,6 +1,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-12">
+            <button class="btn btn-danger mb-3" wire:click="logout">Logout</button>
             <button class="btn btn-primary mb-3" wire:click="resetFields">Create Jurnal</button>
             {{-- @dd($hodims[0]) --}}
             @if ($isFormVisible)
@@ -15,15 +16,6 @@
                             <option value="">Select Employment</option>
                             @foreach ($hodims as $hodim)
                                 <option value="{{ $hodim->section }}"></option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="user_id">User</label>
-                        <select id="user_id" class="form-control" wire:model="user_id">
-                            <option value="">Select User</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -50,7 +42,6 @@
                 <thead>
                     <tr>
                         <th>Employment</th>
-                        <th>User</th>
                         <th>Date</th>
                         <th>Start Time</th>
                         <th>End Time</th>
@@ -63,8 +54,7 @@
                     @foreach ($jurnals as $jurnal)
                         <tr>
                             {{-- @dd($jurnals) --}}
-                            <td>{{ $jurnal->hodim_id }}</td>
-                            <td>{{ $jurnal->user->name }}</td>
+                            <td>{{ $jurnal->hodim->section }}</td>
                             <td>{{ $jurnal->date }}</td>
                             <td>{{ $jurnal->start_time }}</td>
                             <td>{{ $jurnal->end_time }}</td>

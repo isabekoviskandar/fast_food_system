@@ -50,11 +50,20 @@ class User extends Authenticatable
 
     public function hodim()
     {
-        return $this->hasMany(Hodim::class);
+        return $this->hasOne(Hodim::class,);
     }
 
-    public function jurnal()
+    public function jurnals()
     {
         return $this->hasMany(Jurnal::class);
+    }
+
+    public function hasRole($role): bool
+    {
+        if (is_array($role)) {
+            return $this->roles()->whereIn('name', $role)->exists();
+        }
+        
+        return $this->roles()->where('name', $role)->exists();
     }
 }

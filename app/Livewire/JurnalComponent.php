@@ -5,6 +5,9 @@ namespace App\Livewire;
 use App\Models\Hodim;
 use App\Models\Jurnal;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Container\Attributes\Log;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -43,10 +46,54 @@ class JurnalComponent extends Component
         $this->isFormVisible = true; 
     }
 
+    public function logout()
+    {
+        $user = Auth::user();
+        $date = now()->setTimezone('UTC')->toDateString(); // Or whatever your database timezone is
+
+        
+        $jurnal = Jurnal::where('hodim_id', $user->hodim->id)->where('date', $date)->first();
+        // dd($user->hodim);
+        // dd($date);
+        
+        if ($jurnal) {
+            $end_time = Carbon::now()->toTimeString();
+            $start_time = $jurnal->start_time;
+    
+            if ($start_time && strtotime($start_time) !== false) {
+                $time_difference = round((strtotime($end_time) - strtotime($start_time)) / 3600, 2);
+    
+                try {
+                    $jurnal->update([
+                        // dd($jurnal),
+                        'end_time' => $end_time,
+                        'time' => $time_difference,
+                    ]);
+                } catch (\Exception $e) {
+                    // Log the error or show it in the session
+                    session()->flash('error', 'Failed to update journal: ' . $e->getMessage());
+                    // Optionally, log this error for debugging
+                    Log::info('Error updating journal for user ' . $user->id . ': ' . $e->getMessage());
+                    Log::info('Start Time: ' . $start_time);
+                    Log::info('End Time: ' . $end_time);
+                    Log::info('Time Difference: ' . $time_difference);
+                }
+            } else {
+                session()->flash('error', 'Start time is invalid or missing.');
+                return redirect('/');
+            }
+        }
+    
+        Auth::logout();
+        session()->flash('success', 'Siz tizimdan muvaffaqiyatli chiqdingiz!');
+        return redirect('/');
+    }
+    
+
     public function closeForm()
     {
         $this->resetFields();
-        $this->isFormVisible = false; 
+        $this->isFormVisible = false;  
     }
 
     public function create()

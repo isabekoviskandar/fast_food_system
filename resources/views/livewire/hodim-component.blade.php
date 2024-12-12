@@ -3,7 +3,29 @@
       <div class="mb-4">
           <button wire:click="$set('isCreateMode', true)" class="btn btn-success">Create Hodim</button>
       </div>
+      @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
 
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if(session('errors'))
+        <div class="alert alert-danger">
+            <ul>
+                @foreach(session('errors') as $field => $errors)
+                    @foreach($errors as $error)
+                        <li>{{ $field }}: {{ $error }}</li>
+                    @endforeach
+                @endforeach
+            </ul>
+        </div>
+    @endif
       @if($isCreateMode)
       <div class="row mb-4">
           <div class="col-12">
@@ -51,10 +73,10 @@
                     <label for="end_time">End Time</label>
                     <input type="datetime-local" wire:model="end_time" class="form-control" id="end_time" required>
                 </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                       <label for="time">Time</label>
                       <input type="number" wire:model="time" class="form-control" id="time" required>
-                  </div>
+                  </div> --}}
 
                   <button type="submit" class="btn btn-primary">Employee Create</button>
                   <button type="button" wire:click="$set('isCreateMode', false)" class="btn btn-secondary">Cancel</button>

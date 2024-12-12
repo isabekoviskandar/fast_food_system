@@ -1,60 +1,47 @@
 <div>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <div class="login-box">
-                    <div class="login-logo">
-                        <a href="#"><b>Admin</b>LTE</a>
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Sign in to start your session</h3>
                     </div>
-                    <div class="card">
-                        <div class="card-body login-card-body">
-                            <p class="login-box-msg">Sign in to start your session</p>
-                            
-                            @if($error)
-                                <div class="alert alert-danger">
-                                    {{ $error }}
-                                </div>
-                            @endif
-
-                            <form wire:submit.prevent="login">
-                                <div class="input-group mb-3">
-                                    <input 
-                                        type="phone" 
-                                        class="form-control" 
-                                        placeholder="Phone" 
-                                        wire:model="phone"
-                                    >
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-envelope"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <input 
-                                        type="password" 
-                                        class="form-control" 
-                                        placeholder="Password" 
-                                        wire:model="password"
-                                    >
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-lock"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <button 
-                                            type="submit" 
-                                            class="btn btn-primary btn-block"
-                                        >
-                                            Sign In
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="card-body">
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        <form wire:submit.prevent="login">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input 
+                                    type="text" 
+                                    id="phone" 
+                                    class="form-control" 
+                                    placeholder="Enter your phone number"
+                                    wire:model="phone"
+                                >
+                                @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    class="form-control" 
+                                    placeholder="Enter your password"
+                                    wire:model="password"
+                                >
+                                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </form>
                     </div>
                 </div>
             </div>
