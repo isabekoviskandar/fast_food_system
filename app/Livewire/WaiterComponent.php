@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\Order;
 use Livewire\Component;
 
-class DeliveryComponent extends Component
+class WaiterComponent extends Component
 {
     public $orders;
 
@@ -15,15 +15,16 @@ class DeliveryComponent extends Component
     }
 
 
+
     public function render()
     {
-        $this->orders = Order::whereIn('status', ['in_progress', 'done'])->get();
-    
         $statuses = [
+            'took' => $this->orders->where('status', 'took'),
             'in progress' => $this->orders->where('status', 'in_progress'),
             'done' => $this->orders->where('status', 'done'),
+            'in_waiter' => $this->orders->where('status', 'in_waiter'),
         ];
-    
-        return view('livewire.delivery-component', compact('statuses'))->layout('components.layouts.user');
+
+        return view('livewire.waiter-component', compact('statuses'))->layout('components.layouts.app');
     }
 }

@@ -11,6 +11,7 @@ use App\Livewire\JurnalComponent;
 use App\Livewire\OrdersComponent;
 use App\Livewire\UserComponent;
 use App\Livewire\UsersComponent;
+use App\Livewire\WaiterComponent;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', AuthComponent::class);
@@ -26,3 +27,4 @@ Route::get('/hodim' , HodimComponent::class);
 Route::get('/jurnal' , JurnalComponent::class);
 Route::get('/logout' , AuthComponent::class);
 Route::get('/delivery' , DeliveryComponent::class);
+Route::get('/waiter' , WaiterComponent::class);

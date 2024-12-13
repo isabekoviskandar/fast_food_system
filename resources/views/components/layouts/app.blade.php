@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 
 
 </head>
@@ -47,101 +46,117 @@
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="/category" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Categories
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/foods" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Foods
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/orders" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Orders
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/users" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Users
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/bolim" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Sections
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/hodim" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Employes
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/jurnal" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Jurnal
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/user" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                User page
-                <span class="right badge badge-secodary"></span>
-              </p>
-            </a>
-          </li>
-            <a href="/logout" class="nav-link logout-link">
-            <i class="nav-icon fas fa-sign-out-alt"></i>
-            <p>
-              Logout
-            </p>
-          </a>
-        </li>
-
-        
-        
-        
+    
+            <li class="nav-item menu-open">
+                <a href="#" class="nav-link active">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        Dashboard
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    @if(auth()->check() && (auth()->user()->role == 'admin' || auth()->user()->role == 'hodim'))
+                        <li class="nav-item">
+                            <a href="/category" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Categories
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/foods" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Foods
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/orders" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Orders
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/users" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Users
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/bolim" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Sections
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/hodim" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Employees
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/jurnal" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Journal
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                    @endif
+    
+                    @if(auth()->check() && (auth()->user()->role == 'waiter' || auth()->user()->role == 'admin' || auth()->user()->role == 'hodim'))
+                        <li class="nav-item">
+                            <a href="/waiter" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Waiter
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                    @endif
+    
+                    @if(auth()->check())
+                        <li class="nav-item">
+                            <a href="/user" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    User Page
+                                    <span class="right badge badge-secondary"></span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/logout" class="nav-link logout-link">
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
         </ul>
-      </nav>
+    </nav>
     </div>
   </aside>
 

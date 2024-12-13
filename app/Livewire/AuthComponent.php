@@ -64,7 +64,11 @@ class AuthComponent extends Component
         if (Auth::attempt(['phone' => $this->phone, 'password' => $this->password])) {
             $user = Auth::user();
             $hodim_id = $user->hodim ? $user->hodim->id : null;
-    
+            if ($user->role == 'admin') {
+                return redirect('/category');
+            }elseif($user->role == 'waiter'){
+                return redirect('/waiter');
+            }
             if (!$hodim_id) {
                 session()->flash('error', 'Hodim topilmadi!');
                 return back();
