@@ -22,7 +22,7 @@ class OrdersComponent extends Component
             return;
         }
 
-        $statuses = ['took', 'in_progress', 'done', 'rejected'];
+        $statuses = ['took', 'in_progress', 'done', 'in_waiter'];
 
         $currentIndex = array_search($order->status, $statuses);
         $nextIndex = ($currentIndex + 1) % count($statuses);
@@ -38,7 +38,7 @@ class OrdersComponent extends Component
             'took' => $this->orders->where('status', 'took'),
             'in progress' => $this->orders->where('status', 'in_progress'),
             'done' => $this->orders->where('status', 'done'),
-            'rejected' => $this->orders->where('status', 'rejected'),
+            'in_waiter' => $this->orders->where('status', 'in_waiter'),
         ];
 
         return view('livewire.orders-component', compact('statuses'));

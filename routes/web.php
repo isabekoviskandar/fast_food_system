@@ -3,6 +3,7 @@
 use App\Livewire\AuthComponent;
 use App\Livewire\BolimComponent;
 use App\Livewire\CategoryComponent;
+use App\Livewire\DeliveryComponent;
 use App\Livewire\FoodComponent;
 use App\Livewire\FoodFilter;
 use App\Livewire\HodimComponent;
@@ -24,3 +25,4 @@ Route::get('/users' , UsersComponent::class);
 Route::get('/hodim' , HodimComponent::class);
 Route::get('/jurnal' , JurnalComponent::class);
 Route::get('/logout' , AuthComponent::class);
+Route::get('/delivery' , DeliveryComponent::class);

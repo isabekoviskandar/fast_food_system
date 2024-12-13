@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jurnals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hodim_id')->constrained('hodims')->cascadeOnDelete();
-            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('date');
             $table->time('start_time')->nullable();

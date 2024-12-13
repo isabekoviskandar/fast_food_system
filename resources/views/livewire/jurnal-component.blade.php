@@ -54,11 +54,11 @@
                     @foreach ($jurnals as $jurnal)
                         <tr>
                             {{-- @dd($jurnals) --}}
-                            <td>{{ $jurnal->hodim->section }}</td>
+                            <td>{{ $jurnal->hodim->user->name }}</td>
                             <td>{{ $jurnal->date }}</td>
                             <td>{{ $jurnal->start_time }}</td>
                             <td>{{ $jurnal->end_time }}</td>
-                            <td>{{ intdiv($jurnal->time, 60) }} hours {{ $jurnal->time % 60 }} minutes</td>
+                            <td>{{$jurnal->time}} minutes</td>
 
                             <td>
                                 <button class="btn btn-info" wire:click="edit({{ $jurnal->id }})">Edit</button>

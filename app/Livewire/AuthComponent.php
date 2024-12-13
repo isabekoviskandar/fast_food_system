@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Jurnal;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -17,13 +18,13 @@ class AuthComponent extends Component
     ];
     private function getOrCreateJurnalEntry($user, $date)
     {
-        
+
         return Jurnal::firstOrCreate([
             'user_id' => $user->id,
             'date' => $date
         ], [
             'hodim_id' => $user->hodim->id,
-            'start_time' => now()->toTimeString(), // or now() if it's dateTime
+            'start_time' => now()->toTimeString(),
             'end_time' => null,
             'time' => 0,
         ]);
@@ -40,7 +41,7 @@ class AuthComponent extends Component
             $end_time = now();
             $start_time = $jurnal->start_time;
 
-            $time_difference = round((strtotime($end_time) - strtotime($start_time)) / 3600, 2);
+            $time_difference = round(Carbon::parse($end_time)->floatDiffInHours($start_time), 2);
 
             $jurnal->update([
                 'end_time' => $end_time,

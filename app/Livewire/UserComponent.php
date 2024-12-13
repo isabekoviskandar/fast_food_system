@@ -15,7 +15,7 @@
         public $cart = [];
         public $queu;
 
-        public $showCart = false; // Track if cart is shown or not
+        public $showCart = false; 
 
         public function toggleCart()
         {
@@ -91,7 +91,7 @@
                 $this->recalculateTotal();
                 $this->updateCartCount();
         
-                $this->dispatch('cart-updated'); // Fire event
+                $this->dispatch('cart-updated'); 
                 session()->flash('success', 'Item removed from cart.');
             }
         }
@@ -103,10 +103,13 @@
                 session()->flash('error', 'Your cart is empty.');
                 return;
             }
-        
+            
+            $lastSequence = Order::max('sequence');
+            $newSequence = $lastSequence ? $lastSequence + 1 : 1;
+            
             $order = Order::create([
                 'date' => now()->toDateString(),
-                'sequence' => rand(1000, 9999),
+                'sequence' => $newSequence,
                 'sum' => $this->total,
                 'status' => 'took',
             ]);

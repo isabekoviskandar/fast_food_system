@@ -1,9 +1,9 @@
 <div>
     <div class="container mt-5">
         <div class="row">
-            @foreach (['took', 'in progress', 'done', 'rejected'] as $status)
+            @foreach (['took', 'in progress', 'done', 'in_waiter'] as $status)
                 <div class="col-12 col-md-3">
-                    <div class="card card-row card-{{ $status === 'done' ? 'success' : ($status === 'rejected' ? 'danger' : 'primary') }}">
+                    <div class="card card-row card-{{ $status === 'done' ? 'success' : ($status === 'in_waiter' ? 'success' : 'primary') }}">
                         <div class="card-header">
                             <h3 class="card-title">{{ ucfirst($status) }}</h3>
                         </div>

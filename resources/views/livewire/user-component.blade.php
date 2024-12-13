@@ -8,6 +8,9 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
+                    <li>
+                        <a href="/delivery" class="nav-link mt-3">Orders</a>
+                    </li>
                     <li class="nav-item">
                         <a href="/user" class="nav-link">All</a>
                     </li>
